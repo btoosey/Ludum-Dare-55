@@ -1,0 +1,34 @@
+[gd_scene load_steps=4 format=3 uid="uid://eb3f5ukyhsl3"]
+
+[ext_resource type="Script" path="res://scenes/summon_ui/hands/summon_position_control.gd" id="1_vfb7v"]
+[ext_resource type="Script" path="res://scenes/summon_ui/hands/summon_position.gd" id="2_iiwyp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fs76b"]
+size = Vector2(30, 30.5)
+
+[node name="SummonPositionControl" type="Control"]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 64.0
+offset_bottom = 72.0
+mouse_filter = 2
+script = ExtResource("1_vfb7v")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 16.0
+offset_right = 52.0
+offset_bottom = 56.0
+mouse_filter = 2
+
+[node name="SummonPosition" type="Area2D" parent="."]
+collision_layer = 2
+script = ExtResource("2_iiwyp")
+
+[node name="PositionDropArea" type="CollisionShape2D" parent="SummonPosition"]
+position = Vector2(32, 36.25)
+shape = SubResource("RectangleShape2D_fs76b")
+
+[connection signal="assign_summon" from="SummonPosition" to="." method="_on_summon_position_assign_summon"]

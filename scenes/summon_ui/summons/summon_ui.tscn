@@ -1,0 +1,136 @@
+[gd_scene load_steps=9 format=3 uid="uid://d1jft1v6kqhxb"]
+
+[ext_resource type="Script" path="res://scenes/summon_ui/summons/summon_ui.gd" id="1_3ppa8"]
+[ext_resource type="Script" path="res://scenes/summon_state_machine.gd" id="2_p2m5t"]
+[ext_resource type="Script" path="res://scenes/summon_ui/summon_states/summon_base_state.gd" id="3_m8iew"]
+[ext_resource type="Script" path="res://scenes/summon_ui/summon_states/summon_clicked_state.gd" id="4_7j6d3"]
+[ext_resource type="Script" path="res://scenes/summon_ui/summon_states/summon_dragging_state.gd" id="5_fqct5"]
+[ext_resource type="Script" path="res://scenes/summon_ui/summon_states/summon_released_state.gd" id="6_2t1fh"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ufxqr"]
+radius = 8.06226
+
+[sub_resource type="GDScript" id="GDScript_rib6q"]
+script/source = "extends SummonState
+
+const MOUSE_Y_SNAPBACK_THRESHOLD := 138
+
+func enter() -> void:
+	summon_ui.state.text = \"AIMING\"
+	summon_ui.targets.clear()
+	summon_ui.drop_point_detector.monitoring = false
+	Events.summon_aim_started.emit(summon_ui)
+	
+func exit() -> void:
+	Events.summon_aim_ended.emit(summon_ui)
+
+func on_input(event: InputEvent) -> void:
+	var mouse_motion := event is InputEventMouseMotion
+	var mouse_at_bottom := summon_ui.get_global_mouse_position().y > MOUSE_Y_SNAPBACK_THRESHOLD
+	
+	if (mouse_motion and mouse_at_bottom) or event.is_action_pressed(\"right_mouse\"):
+		transition_requested.emit(self, SummonState.State.BASE)
+	elif event.is_action_released(\"left_mouse\") or event.is_action_pressed(\"left_mouse\"):
+		get_viewport().set_input_as_handled()
+		transition_requested.emit(self, SummonState.State.RELEASED)
+"
+
+[node name="SummonUI" type="Control"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 64.0
+offset_bottom = 64.0
+script = ExtResource("1_3ppa8")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.458824, 1, 1, 1)
+
+[node name="state" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -23.0
+offset_top = -8.0
+offset_right = 24.0
+offset_bottom = 15.0
+grow_horizontal = 2
+text = "STATE"
+
+[node name="Stats" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="Attack" type="Label" parent="Stats"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = -10.0
+offset_right = 22.0
+offset_bottom = 13.0
+text = "2"
+
+[node name="Health" type="Label" parent="Stats"]
+layout_mode = 0
+offset_left = -20.0
+offset_top = -10.0
+offset_right = -10.0
+offset_bottom = 13.0
+text = "3"
+
+[node name="DropPointDetector" type="Area2D" parent="."]
+position = Vector2(32, 31)
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DropPointDetector"]
+shape = SubResource("CircleShape2D_ufxqr")
+
+[node name="SummonStateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("2_p2m5t")
+initial_state = NodePath("SummonBaseState")
+
+[node name="SummonBaseState" type="Node" parent="SummonStateMachine"]
+script = ExtResource("3_m8iew")
+
+[node name="SummonClickedState" type="Node" parent="SummonStateMachine"]
+script = ExtResource("4_7j6d3")
+state = 1
+
+[node name="SummonDraggingState" type="Node" parent="SummonStateMachine"]
+script = ExtResource("5_fqct5")
+state = 2
+
+[node name="SummonReleasedState" type="Node" parent="SummonStateMachine"]
+script = ExtResource("6_2t1fh")
+state = 4
+
+[node name="SummonAimingState" type="Node" parent="SummonStateMachine"]
+script = SubResource("GDScript_rib6q")
+state = 3
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="area_entered" from="DropPointDetector" to="." method="_on_drop_point_detector_area_entered"]
+[connection signal="area_exited" from="DropPointDetector" to="." method="_on_drop_point_detector_area_exited"]
