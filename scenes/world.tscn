@@ -1,14 +1,23 @@
-[gd_scene load_steps=6 format=3 uid="uid://cr8nqrukv0eq2"]
+[gd_scene load_steps=7 format=3 uid="uid://cr8nqrukv0eq2"]
 
 [ext_resource type="PackedScene" uid="uid://eb3f5ukyhsl3" path="res://scenes/summon_ui/hands/summon_position_control.tscn" id="1_7v1xo"]
 [ext_resource type="Script" path="res://scenes/summon_ui/hands/summon_hand.gd" id="1_fk863"]
+[ext_resource type="Texture2D" uid="uid://6y6lw3r1n8dv" path="res://assets/sprites/background.png" id="1_frbwt"]
 [ext_resource type="PackedScene" uid="uid://d1jft1v6kqhxb" path="res://scenes/summon_ui/summons/summon_ui.tscn" id="1_lnr7w"]
 [ext_resource type="Resource" uid="uid://ck4soatj0a3n3" path="res://summons/summon_level_001.tres" id="4_3nd8c"]
 [ext_resource type="PackedScene" uid="uid://cxr6gs55uu0uf" path="res://scenes/summon_ui/summons/enemy_ui.tscn" id="5_xpwwa"]
 
 [node name="World" type="Node2D"]
 
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(640, 360)
+scale = Vector2(2, 2)
+texture = ExtResource("1_frbwt")
+
 [node name="BattleUI" type="CanvasLayer" parent="." groups=["ui_layer"]]
+scale = Vector2(2, 2)
+transform = Transform2D(2, 0, 0, 2, 0, 0)
 
 [node name="PlayerHands" type="Control" parent="BattleUI"]
 layout_mode = 3
@@ -17,19 +26,25 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
+offset_left = -407.48
+offset_top = -112.0
+offset_right = -367.48
+offset_bottom = -72.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="SummonHand" type="Control" parent="BattleUI/PlayerHands"]
-layout_mode = 3
-anchors_preset = 0
-offset_left = -229.0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -204.0
+offset_top = -23.0
+offset_bottom = 23.0
+grow_horizontal = 0
+grow_vertical = 2
 
 [node name="SummonSlots" type="HBoxContainer" parent="BattleUI/PlayerHands/SummonHand"]
 layout_mode = 1
@@ -38,9 +53,9 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -268.0
-offset_top = -36.0
-offset_bottom = 36.0
+offset_left = -200.0
+offset_top = -20.0
+offset_bottom = 26.0
 grow_horizontal = 0
 grow_vertical = 2
 alignment = 2
@@ -63,13 +78,18 @@ layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_top = -36.0
-offset_right = 268.0
-offset_bottom = 36.0
+offset_left = -0.000183105
+offset_top = -20.0
+offset_right = 200.0
+offset_bottom = 26.0
 grow_vertical = 2
 script = ExtResource("1_fk863")
 
 [node name="SummonUI" parent="BattleUI/PlayerHands/Summons" instance=ExtResource("1_lnr7w")]
+layout_mode = 2
+summon = ExtResource("4_3nd8c")
+
+[node name="SummonUI4" parent="BattleUI/PlayerHands/Summons" instance=ExtResource("1_lnr7w")]
 layout_mode = 2
 summon = ExtResource("4_3nd8c")
 
@@ -88,19 +108,25 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 424.0
-offset_top = -20.0
-offset_right = 464.0
-offset_bottom = 20.0
+offset_left = -103.17
+offset_top = -112.0
+offset_right = -63.1697
+offset_bottom = -72.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="EnemySummonHand" type="Control" parent="BattleUI/EnemyHands"]
-layout_mode = 3
-anchors_preset = 0
-offset_left = -229.0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -204.0
+offset_top = -23.0
+offset_bottom = 23.0
+grow_horizontal = 0
+grow_vertical = 2
 
 [node name="EnemySummonSlots" type="HBoxContainer" parent="BattleUI/EnemyHands/EnemySummonHand"]
 layout_mode = 1
@@ -109,12 +135,11 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -268.0
-offset_top = -36.0
-offset_bottom = 36.0
+offset_left = -200.0
+offset_top = -20.0
+offset_bottom = 26.0
 grow_horizontal = 0
 grow_vertical = 2
-alignment = 2
 
 [node name="SummonPositionControl" parent="BattleUI/EnemyHands/EnemySummonHand/EnemySummonSlots" instance=ExtResource("1_7v1xo")]
 layout_mode = 2
@@ -136,9 +161,9 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -268.0
-offset_top = -36.0
-offset_bottom = 36.0
+offset_left = -204.0
+offset_top = -24.0
+offset_bottom = 24.0
 grow_horizontal = 0
 grow_vertical = 2
 

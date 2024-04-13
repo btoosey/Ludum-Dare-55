@@ -1,39 +1,55 @@
-[gd_scene load_steps=2 format=3 uid="uid://bjposwvxiwjmc"]
+[gd_scene load_steps=5 format=3 uid="uid://bjposwvxiwjmc"]
 
 [ext_resource type="Script" path="res://stats_ui.gd" id="1_x5c1o"]
+[ext_resource type="Texture2D" uid="uid://6v8ppixfqsp5" path="res://assets/sprites/Summon Hands/health.png" id="2_ahob1"]
+[ext_resource type="Theme" uid="uid://bq2q2hgwnrcdd" path="res://themes/main_theme.tres" id="3_4v3r6"]
+[ext_resource type="Texture2D" uid="uid://c7k4vr4mdtgd7" path="res://assets/sprites/Summon Hands/attack.png" id="4_owe8t"]
 
 [node name="StatsUI" type="HBoxContainer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -40.0
-offset_top = -56.0
-offset_right = -1032.0
-offset_bottom = -576.0
+offset_right = -1242.0
+offset_bottom = -704.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_x5c1o")
 
-[node name="Health" type="HBoxContainer" parent="."]
-layout_mode = 2
-
-[node name="HealthIcon" type="TextureRect" parent="Health"]
-layout_mode = 2
-
-[node name="HealthLabel" type="Label" parent="Health"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_vertical = 1
-text = "0"
-
-[node name="Attack" type="HBoxContainer" parent="."]
+[node name="Attack" type="VBoxContainer" parent="."]
 layout_mode = 2
 
 [node name="AttackIcon" type="TextureRect" parent="Attack"]
+texture_filter = 1
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("4_owe8t")
 
 [node name="AttackLabel" type="Label" parent="Attack"]
 unique_name_in_owner = true
+texture_filter = 1
 layout_mode = 2
+size_flags_horizontal = 4
 size_flags_vertical = 1
+theme = ExtResource("3_4v3r6")
+theme_override_colors/font_color = Color(0.984314, 0.976471, 0.941176, 1)
+text = "0"
+
+[node name="Health" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="HealthIcon" type="TextureRect" parent="Health"]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("2_ahob1")
+stretch_mode = 2
+
+[node name="HealthLabel" type="Label" parent="Health"]
+unique_name_in_owner = true
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 1
+theme = ExtResource("3_4v3r6")
+theme_override_colors/font_color = Color(0.984314, 0.976471, 0.941176, 1)
 text = "0"

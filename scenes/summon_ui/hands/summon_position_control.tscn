@@ -1,34 +1,38 @@
-[gd_scene load_steps=4 format=3 uid="uid://eb3f5ukyhsl3"]
+[gd_scene load_steps=5 format=3 uid="uid://eb3f5ukyhsl3"]
 
 [ext_resource type="Script" path="res://scenes/summon_ui/hands/summon_position_control.gd" id="1_vfb7v"]
 [ext_resource type="Script" path="res://scenes/summon_ui/hands/summon_position.gd" id="2_iiwyp"]
+[ext_resource type="Texture2D" uid="uid://kshn8ul7lvvh" path="res://assets/sprites/Summon Hands/summon_placement.png" id="2_rml5v"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fs76b"]
-size = Vector2(30, 30.5)
+size = Vector2(24, 36)
 
 [node name="SummonPositionControl" type="Control"]
-custom_minimum_size = Vector2(64, 0)
+custom_minimum_size = Vector2(48, 0)
 layout_mode = 3
 anchors_preset = 0
-offset_right = 64.0
-offset_bottom = 72.0
+offset_right = 48.0
+offset_bottom = 38.0
 mouse_filter = 2
 script = ExtResource("1_vfb7v")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="TextureRect" parent="."]
+texture_filter = 1
 layout_mode = 0
-offset_left = 12.0
-offset_top = 16.0
-offset_right = 52.0
-offset_bottom = 56.0
+offset_left = -1.0
+offset_top = 32.0
+offset_right = 49.0
+offset_bottom = 49.0
 mouse_filter = 2
+texture = ExtResource("2_rml5v")
+stretch_mode = 2
 
 [node name="SummonPosition" type="Area2D" parent="."]
 collision_layer = 2
 script = ExtResource("2_iiwyp")
 
 [node name="PositionDropArea" type="CollisionShape2D" parent="SummonPosition"]
-position = Vector2(32, 36.25)
+position = Vector2(24, 19)
 shape = SubResource("RectangleShape2D_fs76b")
 
 [connection signal="assign_summon" from="SummonPosition" to="." method="_on_summon_position_assign_summon"]

@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://d1jft1v6kqhxb"]
+[gd_scene load_steps=10 format=3 uid="uid://d1jft1v6kqhxb"]
 
 [ext_resource type="Script" path="res://scenes/summon_ui/summons/summon_ui.gd" id="1_3ppa8"]
 [ext_resource type="Script" path="res://scenes/summon_state_machine.gd" id="2_p2m5t"]
+[ext_resource type="PackedScene" uid="uid://bjposwvxiwjmc" path="res://summons/stats_ui.tscn" id="2_vc7c6"]
 [ext_resource type="Script" path="res://scenes/summon_ui/summon_states/summon_base_state.gd" id="3_m8iew"]
 [ext_resource type="Script" path="res://scenes/summon_ui/summon_states/summon_clicked_state.gd" id="4_7j6d3"]
 [ext_resource type="Script" path="res://scenes/summon_ui/summon_states/summon_dragging_state.gd" id="5_fqct5"]
@@ -36,11 +37,12 @@ func on_input(event: InputEvent) -> void:
 "
 
 [node name="SummonUI" type="Control"]
-custom_minimum_size = Vector2(64, 64)
+custom_minimum_size = Vector2(48, 48)
 layout_mode = 3
 anchors_preset = 0
-offset_right = 64.0
-offset_bottom = 64.0
+offset_top = -27.0
+offset_right = 46.0
+offset_bottom = 19.0
 script = ExtResource("1_3ppa8")
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -50,10 +52,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -65,38 +67,23 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -23.0
-offset_top = -8.0
+offset_top = -18.0
 offset_right = 24.0
-offset_bottom = 15.0
+offset_bottom = 5.0
 grow_horizontal = 2
 text = "STATE"
 
-[node name="Stats" type="Control" parent="."]
+[node name="StatsUI" parent="." instance=ExtResource("2_vc7c6")]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
-anchor_bottom = 1.0
-grow_horizontal = 2
+offset_left = -17.0
+offset_top = 10.0
+offset_right = 17.0
+offset_bottom = 44.0001
 grow_vertical = 0
-mouse_filter = 2
-
-[node name="Attack" type="Label" parent="Stats"]
-layout_mode = 0
-offset_left = 12.0
-offset_top = -10.0
-offset_right = 22.0
-offset_bottom = 13.0
-text = "2"
-
-[node name="Health" type="Label" parent="Stats"]
-layout_mode = 0
-offset_left = -20.0
-offset_top = -10.0
-offset_right = -10.0
-offset_bottom = 13.0
-text = "3"
 
 [node name="DropPointDetector" type="Area2D" parent="."]
 position = Vector2(32, 31)
@@ -104,6 +91,7 @@ collision_mask = 2
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DropPointDetector"]
+position = Vector2(-8, -7)
 shape = SubResource("CircleShape2D_ufxqr")
 
 [node name="SummonStateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
