@@ -3,6 +3,8 @@ extends Control
 
 signal reparent_requested(which_summon_ui: SummonUI)
 
+@export var summon: Summon
+
 @onready var state: Label = $state
 @onready var drop_point_detector: Area2D = $DropPointDetector
 @onready var summon_state_machine: SummonStateMachine = $SummonStateMachine as SummonStateMachine

@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="Summon" load_steps=2 format=3 uid="uid://ck4soatj0a3n3"]
+
+[ext_resource type="Script" path="res://custom_resources/summon.gd" id="1_twrgu"]
+
+[resource]
+script = ExtResource("1_twrgu")
+health = 1
+attack = 1
