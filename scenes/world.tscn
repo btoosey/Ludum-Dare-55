@@ -4,12 +4,12 @@
 [ext_resource type="Script" path="res://scenes/summon_ui/hands/summon_hand.gd" id="1_fk863"]
 [ext_resource type="Texture2D" uid="uid://6y6lw3r1n8dv" path="res://assets/sprites/background.png" id="1_frbwt"]
 [ext_resource type="PackedScene" uid="uid://d1jft1v6kqhxb" path="res://scenes/summon_ui/summons/summon_ui.tscn" id="1_lnr7w"]
-[ext_resource type="Resource" uid="uid://ck4soatj0a3n3" path="res://summons/summon_level_001.tres" id="4_3nd8c"]
 [ext_resource type="PackedScene" uid="uid://cxr6gs55uu0uf" path="res://scenes/summon_ui/summons/enemy_ui.tscn" id="5_xpwwa"]
+[ext_resource type="Resource" uid="uid://dxsujj030wn8a" path="res://enemies/enemy_01.tres" id="6_q2yn4"]
 
 [node name="World" type="Node2D"]
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Background" type="Sprite2D" parent="."]
 texture_filter = 1
 position = Vector2(640, 360)
 scale = Vector2(2, 2)
@@ -87,19 +87,15 @@ script = ExtResource("1_fk863")
 
 [node name="SummonUI" parent="BattleUI/PlayerHands/Summons" instance=ExtResource("1_lnr7w")]
 layout_mode = 2
-summon = ExtResource("4_3nd8c")
 
 [node name="SummonUI4" parent="BattleUI/PlayerHands/Summons" instance=ExtResource("1_lnr7w")]
 layout_mode = 2
-summon = ExtResource("4_3nd8c")
 
 [node name="SummonUI2" parent="BattleUI/PlayerHands/Summons" instance=ExtResource("1_lnr7w")]
 layout_mode = 2
-summon = ExtResource("4_3nd8c")
 
 [node name="SummonUI3" parent="BattleUI/PlayerHands/Summons" instance=ExtResource("1_lnr7w")]
 layout_mode = 2
-summon = ExtResource("4_3nd8c")
 
 [node name="EnemyHands" type="Control" parent="BattleUI"]
 layout_mode = 3
@@ -171,3 +167,4 @@ grow_vertical = 2
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
+stats = ExtResource("6_q2yn4")

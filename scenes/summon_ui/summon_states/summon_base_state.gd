@@ -7,7 +7,7 @@ func enter() -> void:
 		await summon_ui.ready
 	
 	summon_ui.reparent_requested.emit(summon_ui)
-	summon_ui.state.text = "BASE"
+	#summon_ui.state.text = "BASE"
 	summon_ui.pivot_offset = Vector2.ZERO
 
 func on_gui_input(event: InputEvent) -> void:

@@ -8,7 +8,7 @@ func enter() -> void:
 	if ui_layer:
 		summon_ui.reparent(ui_layer)
 		
-	summon_ui.state.text = "DRAGGING"
+	#summon_ui.state.text = "DRAGGING"
 	
 	minimum_drag_time_elapsed = false
 	var threshold_timer := get_tree().create_timer(DRAG_MINIMUM_THRESHOLD, false)

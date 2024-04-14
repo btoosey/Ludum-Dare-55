@@ -3,7 +3,7 @@ extends SummonState
 var played: bool
 
 func enter() -> void:
-	summon_ui.state.text = "RELEASED"
+	#summon_ui.state.text = "RELEASED"
 	
 	played = false
 	

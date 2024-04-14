@@ -8,3 +8,4 @@ extends HBoxContainer
 
 func update_stats(stats) -> void:
 	health_label.text = str(stats.health)
+	attack_label.text = str(stats.attack)
