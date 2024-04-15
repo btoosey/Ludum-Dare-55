@@ -9,6 +9,7 @@ func enter() -> void:
 	summon_ui.reparent_requested.emit(summon_ui)
 	#summon_ui.state.text = "BASE"
 	summon_ui.pivot_offset = Vector2.ZERO
+	summon_ui.stats_ui.visible = true
 
 func on_gui_input(event: InputEvent) -> void:
 	if event.is_action_pressed("left_mouse") and summon_ui_hovered:

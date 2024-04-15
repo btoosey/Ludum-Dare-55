@@ -6,6 +6,8 @@ func enter() -> void:
 
 	
 func on_input(event: InputEvent) -> void:
+	if not summon_ui.draggable:
+		return
 	if event is InputEventMouseMotion:
 		transition_requested.emit(self, SummonState.State.DRAGGING)
 

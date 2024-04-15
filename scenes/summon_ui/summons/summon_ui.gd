@@ -12,6 +12,7 @@ signal reparent_requested(which_summon_ui: SummonUI)
 @onready var summon_state_machine: SummonStateMachine = $SummonStateMachine as SummonStateMachine
 @onready var targets: Array[Node] = []
 
+var draggable: bool = true
 var parent: Control
 
 func set_summon_stats(value: Stats) -> void:

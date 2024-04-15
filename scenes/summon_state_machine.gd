@@ -16,6 +16,7 @@ func init(summon: SummonUI) -> void:
 	if initial_state:
 		initial_state.enter()
 		current_state = initial_state
+
 		
 func on_input(event: InputEvent) -> void:
 	if current_state:

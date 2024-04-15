@@ -1,23 +1,19 @@
-[gd_scene load_steps=19 format=3 uid="uid://cr8nqrukv0eq2"]
+[gd_scene load_steps=15 format=3 uid="uid://cr8nqrukv0eq2"]
 
 [ext_resource type="PackedScene" uid="uid://eb3f5ukyhsl3" path="res://scenes/summon_ui/hands/summon_position_control.tscn" id="1_7v1xo"]
 [ext_resource type="Script" path="res://scenes/world.gd" id="1_erh2s"]
 [ext_resource type="Script" path="res://scenes/summon_ui/hands/summon_hand.gd" id="1_fk863"]
+[ext_resource type="Texture2D" uid="uid://6y6lw3r1n8dv" path="res://assets/sprites/background.png" id="1_frbwt"]
 [ext_resource type="PackedScene" uid="uid://d1jft1v6kqhxb" path="res://scenes/summon_ui/summons/summon_ui.tscn" id="1_lnr7w"]
-[ext_resource type="Texture2D" uid="uid://bmec8xws8turi" path="res://assets/sprites/background_blank.png" id="2_8yqx4"]
 [ext_resource type="PackedScene" uid="uid://cxr6gs55uu0uf" path="res://scenes/summon_ui/summons/enemy_ui.tscn" id="5_xpwwa"]
 [ext_resource type="Resource" uid="uid://dxsujj030wn8a" path="res://enemies/enemy_01.tres" id="6_q2yn4"]
 [ext_resource type="Script" path="res://scenes/game_state_machine.gd" id="7_kw5au"]
-[ext_resource type="Texture2D" uid="uid://cjkc25pmcjcce" path="res://assets/sprites/summon_btn.png" id="7_xp8oh"]
 [ext_resource type="Script" path="res://scenes/game_states/game_base_state.gd" id="8_4v3tc"]
-[ext_resource type="Texture2D" uid="uid://cmmecplc6dgob" path="res://assets/sprites/summon_btn_hovered.png" id="8_ik3wb"]
 [ext_resource type="Script" path="res://scenes/game_states/game_battle_state.gd" id="9_u2g5v"]
 [ext_resource type="Script" path="res://scenes/game_states/game_telescope_state.gd" id="10_dxkh4"]
 [ext_resource type="Texture2D" uid="uid://dj26cxg1m8nll" path="res://assets/sprites/fight.png" id="12_cb32j"]
-[ext_resource type="Theme" uid="uid://bq2q2hgwnrcdd" path="res://themes/main_theme.tres" id="12_it0x8"]
 [ext_resource type="Texture2D" uid="uid://kon440kfi3n8" path="res://assets/sprites/fight_pressed.png" id="13_evtnq"]
 [ext_resource type="Texture2D" uid="uid://bom8sefltniql" path="res://assets/sprites/fight_hovered.png" id="14_ii4nl"]
-[ext_resource type="Texture2D" uid="uid://y0n5p4rlwhkl" path="res://assets/sprites/foreground.png" id="15_j2f6n"]
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_erh2s")
@@ -26,13 +22,7 @@ script = ExtResource("1_erh2s")
 texture_filter = 1
 position = Vector2(640, 360)
 scale = Vector2(2, 2)
-texture = ExtResource("2_8yqx4")
-
-[node name="Foreground" type="Sprite2D" parent="."]
-texture_filter = 1
-position = Vector2(640, 360)
-scale = Vector2(2, 2)
-texture = ExtResource("15_j2f6n")
+texture = ExtResource("1_frbwt")
 
 [node name="BattleUI" type="CanvasLayer" parent="." groups=["ui_layer"]]
 scale = Vector2(2, 2)
@@ -54,23 +44,6 @@ grow_vertical = 2
 texture_normal = ExtResource("12_cb32j")
 texture_pressed = ExtResource("13_evtnq")
 texture_hover = ExtResource("14_ii4nl")
-
-[node name="SummonButton" type="TextureButton" parent="BattleUI"]
-texture_filter = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -341.0
-offset_top = -163.5
-offset_right = -299.0
-offset_bottom = -122.5
-grow_horizontal = 2
-grow_vertical = 2
-texture_normal = ExtResource("7_xp8oh")
-texture_pressed = ExtResource("8_ik3wb")
-texture_hover = ExtResource("8_ik3wb")
 
 [node name="PlayerHands" type="Control" parent="BattleUI"]
 layout_mode = 3
@@ -141,7 +114,7 @@ script = ExtResource("1_fk863")
 [node name="SummonUI" parent="BattleUI/PlayerHands/Summons" instance=ExtResource("1_lnr7w")]
 layout_mode = 2
 
-[node name="SummonUI2" parent="BattleUI/PlayerHands/Summons" instance=ExtResource("1_lnr7w")]
+[node name="SummonUI4" parent="BattleUI/PlayerHands/Summons" instance=ExtResource("1_lnr7w")]
 layout_mode = 2
 
 [node name="EnemyHands" type="Control" parent="BattleUI"]
@@ -216,29 +189,6 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 stats = ExtResource("6_q2yn4")
 
-[node name="EnemyUI2" parent="BattleUI/EnemyHands/EnemySummons" instance=ExtResource("5_xpwwa")]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-stats = ExtResource("6_q2yn4")
-
-[node name="RoundEndLabel" type="Label" parent="BattleUI"]
-visible = false
-texture_filter = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -413.0
-offset_top = -174.0
-offset_right = -320.0
-offset_bottom = -151.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(2, 2)
-theme = ExtResource("12_it0x8")
-
 [node name="GameStateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("7_kw5au")
 initial_state = NodePath("GameBaseState")
@@ -248,11 +198,8 @@ script = ExtResource("8_4v3tc")
 
 [node name="GameBattleState" type="Node" parent="GameStateMachine"]
 script = ExtResource("9_u2g5v")
-state = 1
 
 [node name="GameTelescopeState" type="Node" parent="GameStateMachine"]
 script = ExtResource("10_dxkh4")
-state = 2
 
 [connection signal="pressed" from="BattleUI/FightButton" to="." method="_on_fight_button_pressed"]
-[connection signal="pressed" from="BattleUI/SummonButton" to="." method="_on_summon_button_pressed"]
