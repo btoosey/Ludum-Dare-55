@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Star" load_steps=4 format=3 uid="uid://dab8vnrt4f87j"]
+
+[ext_resource type="Script" path="res://custom_resources/star.gd" id="1_3iryk"]
+[ext_resource type="Texture2D" uid="uid://c2mjc0w24egwy" path="res://assets/sprites/star_blue_small.png" id="2_yik2a"]
+[ext_resource type="Texture2D" uid="uid://d3w5hpnll437w" path="res://assets/sprites/star_blue_large.png" id="3_6p8ns"]
+
+[resource]
+script = ExtResource("1_3iryk")
+health_points = 3
+attack_points = 1
+star_image_default = ExtResource("2_yik2a")
+star_image_selected = ExtResource("3_6p8ns")

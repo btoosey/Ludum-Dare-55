@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 Events="*res://global/events.gd"
 BattleManager="*res://battle_manager.gd"
+StarManager="*res://scenes/StarManager.gd"
 
 [display]
 
@@ -44,6 +45,7 @@ left_mouse={
 
 2d_physics/layer_1="summon_target_selector"
 2d_physics/layer_2="summon_drop_area"
+2d_physics/layer_3="star_area"
 
 [rendering]
 

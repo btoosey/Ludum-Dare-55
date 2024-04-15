@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://dj6lr7uwa8fev"]
+
+[ext_resource type="Script" path="res://scenes/Star.gd" id="1_vsa3j"]
+[ext_resource type="Resource" uid="uid://dloq1kphgqham" path="res://stars/star_yellow.tres" id="2_vcehu"]
+[ext_resource type="Script" path="res://stars/Area2D.gd" id="3_5i3xh"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mkoqc"]
+radius = 4.5
+
+[node name="Star" type="Control" groups=["stars"]]
+layout_mode = 3
+anchors_preset = 0
+scale = Vector2(2, 2)
+script = ExtResource("1_vsa3j")
+star = ExtResource("2_vcehu")
+
+[node name="StarImage" type="Sprite2D" parent="."]
+texture_filter = 1
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("3_5i3xh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_mkoqc")
+one_way_collision_margin = 5.0
+
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]

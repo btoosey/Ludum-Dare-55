@@ -15,7 +15,6 @@ func enter():
 
 func start_battle() -> void:
 	check_battle_outcome()
-	
 
 func check_battle_outcome() -> void:
 	assign_firsts()
@@ -24,12 +23,14 @@ func check_battle_outcome() -> void:
 		round_end_label.visible = true
 		await get_tree().create_timer(3).timeout
 		round_end_label.visible = false
+		StarManager.available_stars += 4
 		transition_requested.emit(self, GameState.State.BASE)
 	elif not first_enemy and first_summon:
 		round_end_label.text = "ROUND WON!"
 		round_end_label.visible = true
 		await get_tree().create_timer(3).timeout
 		round_end_label.visible = false
+		StarManager.available_stars += 4
 		transition_requested.emit(self, GameState.State.BASE)
 		return
 	elif not first_summon and first_enemy:
@@ -56,8 +57,19 @@ func damage_loop() -> void:
 	var summon_attack = first_summon.stats.attack
 	var enemy_summon_attack = first_enemy.stats.attack
 	await get_tree().create_timer(1).timeout
+	var summon_tween = get_tree().create_tween()
+	var enemy_tween = get_tree().create_tween()
+	
+	summon_tween.tween_property(first_summon,"position", Vector2(220,-30), 0.3)
+	summon_tween.tween_property(first_summon,"position", Vector2(152,0), 0.3)
+	enemy_tween.tween_property(first_enemy,"position", Vector2(-60,-27), 0.3)
+	enemy_tween.tween_property(first_enemy,"position", Vector2(0,0), 0.3)
+	
+	await get_tree().create_timer(0.3).timeout
+	
 	first_summon.take_damage(enemy_summon_attack)
 	first_enemy.take_damage(summon_attack)
+	
 	await get_tree().create_timer(0.1).timeout	
 	assign_firsts()
 	

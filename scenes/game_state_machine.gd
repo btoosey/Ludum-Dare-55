@@ -15,8 +15,7 @@ func init() -> void:
 	if initial_state:
 		initial_state.enter()
 		current_state = initial_state
-	
-	print(states)
+
 func on_input(event: InputEvent) -> void:
 	if current_state:
 		current_state.on_input(event)
