@@ -7,7 +7,7 @@ signal stats_changed
 @export var attack: int
 #@export var sprite: Texture
 
-var health: int: set = set_health
+@export var health: int: set = set_health
 
 func set_health(value: int) -> void:
 	health = clampi(value, 0, max_health)
@@ -19,7 +19,11 @@ func take_damage(damage: int) -> void:
 	
 	self.health -= damage
 
+func increase_stats(atk: int, hp: int) -> void:
+	self.attack += atk
+	self.health += hp
+
 func create_instance() -> Resource:
 	var instance: Stats = self.duplicate()
-	instance.health = max_health
+	instance.health = health
 	return instance

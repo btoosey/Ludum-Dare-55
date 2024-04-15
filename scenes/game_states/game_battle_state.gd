@@ -23,14 +23,14 @@ func check_battle_outcome() -> void:
 		round_end_label.visible = true
 		await get_tree().create_timer(3).timeout
 		round_end_label.visible = false
-		StarManager.available_stars += 4
+		StarManager.available_stars += 3
 		transition_requested.emit(self, GameState.State.BASE)
 	elif not first_enemy and first_summon:
 		round_end_label.text = "ROUND WON!"
 		round_end_label.visible = true
 		await get_tree().create_timer(3).timeout
 		round_end_label.visible = false
-		StarManager.available_stars += 4
+		StarManager.available_stars += 3
 		transition_requested.emit(self, GameState.State.BASE)
 		return
 	elif not first_summon and first_enemy:
@@ -70,7 +70,11 @@ func damage_loop() -> void:
 	first_summon.take_damage(enemy_summon_attack)
 	first_enemy.take_damage(summon_attack)
 	
-	await get_tree().create_timer(0.1).timeout	
+	await get_tree().create_timer(0.1).timeout
 	assign_firsts()
 	
 	check_battle_outcome()
+
+func exit():
+	LevelManager.increase_level()
+	SummonManager.create_new_enemies()

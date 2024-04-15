@@ -6,7 +6,8 @@ signal reparent_requested(which_summon_ui: SummonUI)
 @export var stats: Stats : set = set_summon_stats
 
 @onready var stats_ui : StatsUI = $StatsUI
-@onready var color_rect : ColorRect = $ColorRect
+@onready var summon_sprite = $SummonSprite
+@export var sprites: Array[Texture]
 
 @onready var drop_point_detector: Area2D = $DropPointDetector
 @onready var summon_state_machine: SummonStateMachine = $SummonStateMachine as SummonStateMachine
@@ -20,11 +21,9 @@ func set_summon_stats(value: Stats) -> void:
 	
 	if not stats.stats_changed.is_connected(update_stats):
 		stats.stats_changed.connect(update_stats)
-	
 	update_player()
 	
 func update_player() -> void:
-	
 	if not stats is Stats:
 		return
 	
@@ -44,9 +43,13 @@ func take_damage(damage: int) -> void:
 	
 	if stats.health <= 0:
 		queue_free()
-	
+
+func increase_stats(damage: int, health: int) -> void:
+	stats.increase_stats(damage, health)
+
 func _ready() -> void:
 	summon_state_machine.init(self)
+	pick_random_sprite()
 
 func _input(event: InputEvent) -> void:
 	summon_state_machine.on_input(event)
@@ -66,3 +69,7 @@ func _on_drop_point_detector_area_entered(area):
 
 func _on_drop_point_detector_area_exited(area):
 	targets.erase(area)
+
+func pick_random_sprite() -> void:
+	summon_sprite.texture = sprites[RandomNumberGenerator.new().randi_range(0,(sprites.size() -1))]
+	

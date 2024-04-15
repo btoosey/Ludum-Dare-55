@@ -7,6 +7,6 @@
 [resource]
 script = ExtResource("1_3iryk")
 health_points = 3
-attack_points = 1
+attack_points = 0
 star_image_default = ExtResource("2_yik2a")
 star_image_selected = ExtResource("3_6p8ns")

@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Stats" load_steps=2 format=3 uid="uid://vh83s52bhmac"]
+
+[ext_resource type="Script" path="res://custom_resources/stats.gd" id="1_qvigq"]
+
+[resource]
+script = ExtResource("1_qvigq")
+max_health = 0
+attack = 0
+health = 0

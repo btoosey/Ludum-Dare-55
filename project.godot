@@ -17,9 +17,9 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-Events="*res://global/events.gd"
-BattleManager="*res://battle_manager.gd"
+SummonManager="*res://scenes/SummonManager.gd"
 StarManager="*res://scenes/StarManager.gd"
+LevelManager="*res://level_manager.gd"
 
 [display]
 

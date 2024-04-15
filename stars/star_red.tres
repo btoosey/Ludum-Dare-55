@@ -6,7 +6,7 @@
 
 [resource]
 script = ExtResource("1_owgcu")
-health_points = 1
+health_points = 0
 attack_points = 3
 star_image_default = ExtResource("2_bqsic")
 star_image_selected = ExtResource("3_8365m")

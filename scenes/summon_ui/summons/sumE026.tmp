@@ -1,11 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://d1jft1v6kqhxb"]
+[gd_scene load_steps=11 format=3 uid="uid://d1jft1v6kqhxb"]
 
 [ext_resource type="Script" path="res://scenes/summon_ui/summons/summon_ui.gd" id="1_3ppa8"]
-[ext_resource type="Resource" uid="uid://dxsujj030wn8a" path="res://enemies/summon_base.tres" id="2_6741b"]
 [ext_resource type="Script" path="res://scenes/summon_state_machine.gd" id="2_p2m5t"]
+[ext_resource type="Resource" uid="uid://dxsujj030wn8a" path="res://enemies/enemy_01.tres" id="2_psrb6"]
 [ext_resource type="PackedScene" uid="uid://bjposwvxiwjmc" path="res://summons/stats_ui.tscn" id="2_vc7c6"]
 [ext_resource type="Script" path="res://scenes/summon_ui/summon_states/summon_base_state.gd" id="3_m8iew"]
-[ext_resource type="Texture2D" uid="uid://dr4syoq3b1d0u" path="res://assets/sprites/summons/friendly_summon_01.png" id="3_rdhtg"]
 [ext_resource type="Script" path="res://scenes/summon_ui/summon_states/summon_clicked_state.gd" id="4_7j6d3"]
 [ext_resource type="Script" path="res://scenes/summon_ui/summon_states/summon_dragging_state.gd" id="5_fqct5"]
 [ext_resource type="Script" path="res://scenes/summon_ui/summon_states/summon_released_state.gd" id="6_2t1fh"]
@@ -47,11 +46,9 @@ offset_top = -27.0
 offset_right = 46.0
 offset_bottom = 19.0
 script = ExtResource("1_3ppa8")
-stats = ExtResource("2_6741b")
-sprites = Array[Texture]([ExtResource("3_rdhtg")])
+stats = ExtResource("2_psrb6")
 
-[node name="SummonSprite" type="TextureRect" parent="."]
-texture_filter = 1
+[node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -65,6 +62,7 @@ offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+color = Color(0.458824, 1, 1, 1)
 
 [node name="StatsUI" parent="." instance=ExtResource("2_vc7c6")]
 layout_mode = 1

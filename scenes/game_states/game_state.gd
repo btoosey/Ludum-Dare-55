@@ -1,7 +1,7 @@
 class_name GameState
 extends Node
 
-enum State {BASE, BATTLE, TELESCOPE}
+enum State {START, BASE, BATTLE, TELESCOPE}
 
 signal transition_requested(from: GameState, to: State)
 

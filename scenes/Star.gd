@@ -6,6 +6,7 @@ var available: bool = true
 var clickable: bool = false
 var hovered: bool = false
 var selected: bool = false
+@export var star_distance: int
 
 @export var star: Star : set = set_star_stats
 var health_points: int
@@ -51,23 +52,22 @@ func _input(event):
 		return
 	
 	if event.is_action_pressed("left_mouse"):
-		selected = true
+		
 		var star_position = position
 		
 		if (StarManager.temp_constellation.is_empty()):
 			StarManager.temp_constellation.append(self)
+			selected = true
 			StarManager.available_stars -= 1
 		elif (StarManager.temp_constellation.size() == 1):
-			if StarManager.temp_constellation[-1] != self and star_position.distance_to(StarManager.temp_constellation[-1].position) < 400:
+			if StarManager.temp_constellation[-1] != self and star_position.distance_to(StarManager.temp_constellation[-1].position) < star_distance:
 				StarManager.temp_constellation.append(self)
+				selected = true
 				StarManager.available_stars -= 1
-		elif (StarManager.temp_constellation.size() > 1 and (StarManager.temp_constellation[-1] != self and StarManager.temp_constellation[-2] != self)) and star_position.distance_to(StarManager.temp_constellation[-1].position) < 400:
+		elif (StarManager.temp_constellation.size() > 1 and (StarManager.temp_constellation[-1] != self and StarManager.temp_constellation[-2] != self)) and star_position.distance_to(StarManager.temp_constellation[-1].position) < star_distance:
 			StarManager.temp_constellation.append(self)
+			selected = true
 			StarManager.available_stars -= 1
-		else:
-			selected = false
-			
-		print(StarManager.temp_constellation)
 
 func update_star_image() -> void:
 	if (hovered or selected) or !available:
